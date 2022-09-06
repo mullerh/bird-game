@@ -27,6 +27,8 @@ public class AirplaneController : MonoBehaviour
     Text displayText = null;
 
     float thrustPercent;
+    int thrustForwardDirectionMask;
+    int thrustUpDirectionMask;
     float brakesTorque;
 
     AircraftPhysics aircraftPhysics;
@@ -36,6 +38,8 @@ public class AirplaneController : MonoBehaviour
     {
         aircraftPhysics = GetComponent<AircraftPhysics>();
         rb = GetComponent<Rigidbody>();
+        thrustForwardDirectionMask = 1;
+        thrustUpDirectionMask = 0;
     }
 
     private void Update()
@@ -59,6 +63,36 @@ public class AirplaneController : MonoBehaviour
             brakesTorque = brakesTorque > 0 ? 0 : 100f;
         }
 
+        if (Input.GetKeyDown(KeyCode.Alpha1)) {
+            thrustForwardDirectionMask = 1;
+            thrustUpDirectionMask = 1;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            thrustForwardDirectionMask = 1;
+            thrustUpDirectionMask = 0;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            // thrustForwardDirectionMask =-1;
+            // thrustUpDirectionMask = 0;
+
+            GameObject Wings = transform.GetChild(0).gameObject.transform.GetChild(0).gameObject;
+            if (Wings.transform.localEulerAngles.magnitude < 0.1) 
+            {
+                Wings.transform.Rotate(new Vector3(-30, 0, 0));
+            } 
+            else 
+            {
+                Wings.transform.Rotate(new Vector3(30, 0, 0));
+            }
+
+            GameObject Tail = transform.GetChild(0).gameObject.transform.Find("Tail").gameObject;
+            // Tail.GetComponent<AeroSurface>().Config.Span = 3;
+        }
+
         displayText.text = "V: " + ((int)rb.velocity.magnitude).ToString("D3") + " m/s\n";
         displayText.text += "A: " + ((int)transform.position.y).ToString("D4") + " m\n";
         displayText.text += "T: " + (int)(thrustPercent * 100) + "%\n";
@@ -69,6 +103,7 @@ public class AirplaneController : MonoBehaviour
     {
         SetControlSurfecesAngles(Pitch, Roll, Yaw, Flap);
         aircraftPhysics.SetThrustPercent(thrustPercent);
+        aircraftPhysics.SetThrustDirection(transform.up * thrustUpDirectionMask + transform.forward * thrustForwardDirectionMask);
         foreach (var wheel in wheels)
         {
             wheel.brakeTorque = brakesTorque;

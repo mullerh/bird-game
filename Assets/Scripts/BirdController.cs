@@ -67,7 +67,7 @@ public class BirdController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        SetControlSurfecesAngles(Pitch, Roll, Yaw, Flap);
+        SetControlSurfacesAngles(Pitch, Roll, Yaw, Flap);
         aircraftPhysics.SetThrustPercent(thrustPercent);
         foreach (var wheel in wheels)
         {
@@ -77,7 +77,7 @@ public class BirdController : MonoBehaviour
         }
     }
 
-    public void SetControlSurfecesAngles(float pitch, float roll, float yaw, float flap)
+    public void SetControlSurfacesAngles(float pitch, float roll, float yaw, float flap)
     {
         foreach (var surface in controlSurfaces)
         {
@@ -103,6 +103,6 @@ public class BirdController : MonoBehaviour
     private void OnDrawGizmos()
     {
         if (!Application.isPlaying)
-            SetControlSurfecesAngles(Pitch, Roll, Yaw, Flap);
+            SetControlSurfacesAngles(Pitch, Roll, Yaw, Flap);
     }
 }

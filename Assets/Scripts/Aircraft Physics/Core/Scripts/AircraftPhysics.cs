@@ -13,8 +13,14 @@ public class AircraftPhysics : MonoBehaviour
     List<AeroSurface> aerodynamicSurfaces = null;
 
     Rigidbody rb;
+    Vector3 thrustDirection;
     float thrustPercent;
     BiVector3 currentForceAndTorque;
+
+    public void SetThrustDirection(Vector3 direction) 
+    {
+        thrustDirection = direction.normalized;
+    }
 
     public void SetThrustPercent(float percent)
     {
@@ -42,7 +48,7 @@ public class AircraftPhysics : MonoBehaviour
         rb.AddForce(currentForceAndTorque.p);
         rb.AddTorque(currentForceAndTorque.q);
 
-        rb.AddForce(transform.forward * thrust * thrustPercent);
+        rb.AddForce(thrustDirection * thrust * thrustPercent);
     }
 
     private BiVector3 CalculateAerodynamicForces(Vector3 velocity, Vector3 angularVelocity, Vector3 wind, float airDensity, Vector3 centerOfMass)
