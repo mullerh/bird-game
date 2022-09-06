@@ -25,6 +25,10 @@ public class AirplaneController : MonoBehaviour
     public float Flap;
     [SerializeField]
     Text displayText = null;
+    [SerializeField]
+    AeroSurfaceConfig BrakingTailConfig = null;
+    [SerializeField]
+    AeroSurfaceConfig NormalTailConfig = null;
 
     float thrustPercent;
     int thrustForwardDirectionMask;
@@ -34,12 +38,19 @@ public class AirplaneController : MonoBehaviour
     AircraftPhysics aircraftPhysics;
     Rigidbody rb;
 
+    GameObject Wings;
+    GameObject Tail;
+
     private void Start()
     {
         aircraftPhysics = GetComponent<AircraftPhysics>();
         rb = GetComponent<Rigidbody>();
+
         thrustForwardDirectionMask = 1;
         thrustUpDirectionMask = 0;
+
+        Tail = transform.GetChild(0).gameObject.transform.Find("Tail").gameObject;
+        Wings = transform.GetChild(0).gameObject.transform.GetChild(0).gameObject;
     }
 
     private void Update()
@@ -79,18 +90,22 @@ public class AirplaneController : MonoBehaviour
             // thrustForwardDirectionMask =-1;
             // thrustUpDirectionMask = 0;
 
-            GameObject Wings = transform.GetChild(0).gameObject.transform.GetChild(0).gameObject;
             if (Wings.transform.localEulerAngles.magnitude < 0.1) 
             {
                 Wings.transform.Rotate(new Vector3(-30, 0, 0));
+                Wings.transform.GetChild(0).transform.Rotate(new Vector3(0, 0, 25));
+                Wings.transform.GetChild(1).transform.Rotate(new Vector3(0, 0, -25));
+                Tail.transform.Rotate(new Vector3(30, 0, 0));
+                Tail.transform.GetChild(0).GetComponent<AeroSurface>().config = BrakingTailConfig;
             } 
             else 
             {
                 Wings.transform.Rotate(new Vector3(30, 0, 0));
+                Wings.transform.GetChild(0).transform.Rotate(new Vector3(0, 0, -25));
+                Wings.transform.GetChild(1).transform.Rotate(new Vector3(0, 0, 25));
+                Tail.transform.Rotate(new Vector3(-30, 0, 0));
+                Tail.transform.GetChild(0).GetComponent<AeroSurface>().config = NormalTailConfig;
             }
-
-            GameObject Tail = transform.GetChild(0).gameObject.transform.Find("Tail").gameObject;
-            // Tail.GetComponent<AeroSurface>().Config.Span = 3;
         }
 
         displayText.text = "V: " + ((int)rb.velocity.magnitude).ToString("D3") + " m/s\n";
