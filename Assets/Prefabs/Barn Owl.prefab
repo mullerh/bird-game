@@ -219,7 +219,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3317468230489065862}
   m_LocalRotation: {x: 0, y: 0, z: -1, w: 0}
-  m_LocalPosition: {x: 0.75, y: 0.431, z: -0.218}
+  m_LocalPosition: {x: 0.75, y: -0.4190001, z: -0.218}
   m_LocalScale: {x: 1, y: 0.25, z: 1.4}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -378,7 +378,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4343395120224487767}
   m_LocalRotation: {x: -0, y: -0, z: 1, w: 0}
-  m_LocalPosition: {x: 0, y: 0.8500001, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -513,7 +513,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5583366493306847656}
   m_LocalRotation: {x: 0, y: 0, z: -1, w: 0}
-  m_LocalPosition: {x: 3, y: 0.431, z: -0.04}
+  m_LocalPosition: {x: 3, y: -0.4190001, z: -0.04}
   m_LocalScale: {x: 1.4999998, y: 0.25, z: 1.1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -948,6 +948,22 @@ MonoBehaviour:
   Roll: 0
   Flap: 0
   displayText: {fileID: 0}
+  BrakingTailConfig: {fileID: 11400000, guid: 6a7283951ee57004e81d48cd913313d9, type: 2}
+  DivingTailConfig: {fileID: 11400000, guid: 1cc99ec28f4adb54f95f94e217ed5428, type: 2}
+  NormalTailConfig: {fileID: 11400000, guid: 99351602158c8c84ca0fb056ca94b12e, type: 2}
+  Wing1UpsideDownConfig: {fileID: 11400000, guid: 09ae3c4b368ba164c9e6841ae4378b62, type: 2}
+  Wing2UpsideDownConfig: {fileID: 11400000, guid: 6999196d9d0bfc445a0f317d7ec75344, type: 2}
+  Wing3UpsideDownConfig: {fileID: 11400000, guid: 0321981c6a8ab644eac242558606ff8b, type: 2}
+  Wing1NormalConfig: {fileID: 11400000, guid: 159dcb04f73f998459655f65a2ee91c4, type: 2}
+  Wing2NormalConfig: {fileID: 11400000, guid: 0243a76cbd332944595dae4119963535, type: 2}
+  Wing3NormalConfig: {fileID: 11400000, guid: f1123f8fd54013b4586f8c116addac0f, type: 2}
+  LeftWing1Surface: {fileID: 8186487576504492003}
+  LeftWing2Surface: {fileID: 142059582020413374}
+  LeftWing3Surface: {fileID: 827761680301103339}
+  RightWing1Surface: {fileID: 8142259461277850277}
+  RightWing2Surface: {fileID: 1561553365755329494}
+  RightWing3Surface: {fileID: 3196652532084344641}
+  upsideDownThreshold: -0.4
 --- !u!114 &7281754904321658851
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2107,7 +2123,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8350210796100639453}
   m_LocalRotation: {x: 0, y: 0, z: -1, w: 0}
-  m_LocalPosition: {x: 1.75, y: 0.431, z: -0.141}
+  m_LocalPosition: {x: 1.75, y: -0.4190001, z: -0.141}
   m_LocalScale: {x: 1, y: 0.25, z: 1.3}
   m_ConstrainProportionsScale: 0
   m_Children:

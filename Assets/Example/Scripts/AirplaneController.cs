@@ -25,15 +25,55 @@ public class AirplaneController : MonoBehaviour
     public float Flap;
     [SerializeField]
     Text displayText = null;
+
+    // tails
     [SerializeField]
     AeroSurfaceConfig BrakingTailConfig = null;
     [SerializeField]
+    AeroSurfaceConfig DivingTailConfig = null;
+    [SerializeField]
     AeroSurfaceConfig NormalTailConfig = null;
+
+    // wings
+    [SerializeField]
+    AeroSurfaceConfig Wing1UpsideDownConfig = null;
+    [SerializeField]
+    AeroSurfaceConfig Wing2UpsideDownConfig = null;
+    [SerializeField]
+    AeroSurfaceConfig Wing3UpsideDownConfig = null;
+    [SerializeField]
+    AeroSurfaceConfig Wing1NormalConfig = null;
+    [SerializeField]
+    AeroSurfaceConfig Wing2NormalConfig = null;
+    [SerializeField]
+    AeroSurfaceConfig Wing3NormalConfig = null;
+
+    // wing surfaces
+    [SerializeField]
+    AeroSurface LeftWing1Surface;
+    [SerializeField]
+    AeroSurface LeftWing2Surface;
+    [SerializeField]
+    AeroSurface LeftWing3Surface;
+    [SerializeField]
+    AeroSurface RightWing1Surface;
+    [SerializeField]
+    AeroSurface RightWing2Surface;
+    [SerializeField]
+    AeroSurface RightWing3Surface;
+
+    // tweakable stats
+    [SerializeField]
+    float upsideDownThreshold;
 
     float thrustPercent;
     int thrustForwardDirectionMask;
     int thrustUpDirectionMask;
     float brakesTorque;
+
+    // flip flops
+    bool breakFlipFlop = false;
+    bool diveFlipFlop = false;
 
     AircraftPhysics aircraftPhysics;
     Rigidbody rb;
@@ -53,8 +93,32 @@ public class AirplaneController : MonoBehaviour
         Wings = transform.GetChild(0).gameObject.transform.GetChild(0).gameObject;
     }
 
+    private void OnDestroy() 
+    {
+        
+    }
+
     private void Update()
     {
+        if (transform.up.y < upsideDownThreshold) 
+        {
+            LeftWing1Surface.config = Wing1UpsideDownConfig;
+            LeftWing2Surface.config = Wing2UpsideDownConfig;
+            LeftWing3Surface.config = Wing3UpsideDownConfig;
+            RightWing1Surface.config = Wing1UpsideDownConfig;
+            RightWing2Surface.config = Wing2UpsideDownConfig;
+            RightWing3Surface.config = Wing3UpsideDownConfig;
+        }
+        else
+        {
+            LeftWing1Surface.config = Wing1NormalConfig;
+            LeftWing2Surface.config = Wing2NormalConfig;
+            LeftWing3Surface.config = Wing3NormalConfig;
+            RightWing1Surface.config = Wing1NormalConfig;
+            RightWing2Surface.config = Wing2NormalConfig;
+            RightWing3Surface.config = Wing3NormalConfig;
+        }
+
         Pitch = Input.GetAxis("Vertical");
         Roll = Input.GetAxis("Horizontal");
         Yaw = Input.GetAxis("Yaw");
@@ -90,7 +154,7 @@ public class AirplaneController : MonoBehaviour
             // thrustForwardDirectionMask =-1;
             // thrustUpDirectionMask = 0;
 
-            if (Wings.transform.localEulerAngles.magnitude < 0.1) 
+            if (!breakFlipFlop) 
             {
                 Wings.transform.Rotate(new Vector3(-30, 0, 0));
                 Wings.transform.GetChild(0).transform.Rotate(new Vector3(0, 0, 25));
@@ -106,6 +170,24 @@ public class AirplaneController : MonoBehaviour
                 Tail.transform.Rotate(new Vector3(-30, 0, 0));
                 Tail.transform.GetChild(0).GetComponent<AeroSurface>().config = NormalTailConfig;
             }
+            breakFlipFlop = !breakFlipFlop;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha4)) 
+        {
+            if (!diveFlipFlop)
+            {
+                Wings.transform.GetChild(0).transform.localEulerAngles = new Vector3(80, 80, 0);
+                Wings.transform.GetChild(1).transform.localEulerAngles = new Vector3(80, -80, 180);
+                Tail.transform.GetChild(0).GetComponent<AeroSurface>().config = DivingTailConfig;
+            }
+            else 
+            {
+                Wings.transform.GetChild(0).transform.localEulerAngles = new Vector3(0, 0, 0);
+                Wings.transform.GetChild(1).transform.localEulerAngles = new Vector3(0, 0, 180);
+                Tail.transform.GetChild(0).GetComponent<AeroSurface>().config = NormalTailConfig;
+            }
+            diveFlipFlop = !diveFlipFlop;
         }
 
         displayText.text = "V: " + ((int)rb.velocity.magnitude).ToString("D3") + " m/s\n";
