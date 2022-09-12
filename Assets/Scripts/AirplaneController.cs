@@ -26,7 +26,7 @@ public class AirplaneController : MonoBehaviour
     [SerializeField]
     Text displayText = null;
 
-    // tails
+    [Header("Tail Configs")]
     [SerializeField]
     AeroSurfaceConfig BrakingTailConfig = null;
     [SerializeField]
@@ -34,7 +34,7 @@ public class AirplaneController : MonoBehaviour
     [SerializeField]
     AeroSurfaceConfig NormalTailConfig = null;
 
-    // wings
+    [Header("Wing Configs")]
     [SerializeField]
     AeroSurfaceConfig Wing1UpsideDownConfig = null;
     [SerializeField]
@@ -48,7 +48,7 @@ public class AirplaneController : MonoBehaviour
     [SerializeField]
     AeroSurfaceConfig Wing3NormalConfig = null;
 
-    // wing surfaces
+    [Header("Wing Surfaces")]
     [SerializeField]
     AeroSurface LeftWing1Surface;
     [SerializeField]
@@ -62,40 +62,59 @@ public class AirplaneController : MonoBehaviour
     [SerializeField]
     AeroSurface RightWing3Surface;
 
-    // tweakable stats
+    [Header("Tweakable Settings")]
     [SerializeField]
     float upsideDownThreshold;
+    [SerializeField]
+    float diveTailAngle;
 
+    [Header("Thurst Settings")]
+    public float thrustRotationSpeed;
+    public float targetThrustRotation;
+    public float thrustRotation;
     float thrustPercent;
-    int thrustForwardDirectionMask;
-    int thrustUpDirectionMask;
+    
     float brakesTorque;
+
+    [Header("Flap Settings")]
+    public float targetAngle;
+    public float turnSpeed = 0.05f;
+    public Transform rightUpTargetTransform;
+    public Transform leftUpTargetTransform;
+    public Transform rightDownTargetTransform;
+    public Transform leftDownTargetTransform;
+    Quaternion rightRotGoal;
+    Quaternion leftRotGoal;
+    Vector3 rightDirection;
+    Vector3 leftDirection;
 
     // flip flops
     bool breakFlipFlop = false;
     bool diveFlipFlop = false;
+    bool upFlapFlipFlop = false;
+    bool downFlapFlipFlop = false;
 
     AircraftPhysics aircraftPhysics;
     Rigidbody rb;
 
     GameObject Wings;
+    GameObject RightWing;
+    GameObject LeftWing;
     GameObject Tail;
+    GameObject Body;
 
     private void Start()
     {
         aircraftPhysics = GetComponent<AircraftPhysics>();
         rb = GetComponent<Rigidbody>();
 
-        thrustForwardDirectionMask = 1;
-        thrustUpDirectionMask = 0;
-
         Tail = transform.GetChild(0).gameObject.transform.Find("Tail").gameObject;
-        Wings = transform.GetChild(0).gameObject.transform.GetChild(0).gameObject;
-    }
+        Wings = transform.GetChild(0).gameObject.transform.Find("Wings").gameObject;
+        RightWing = Wings.transform.GetChild(0).gameObject;
+        LeftWing = Wings.transform.GetChild(1).gameObject;
+        Body = transform.GetChild(0).gameObject.transform.Find("Body").gameObject;
 
-    private void OnDestroy() 
-    {
-        
+        thrustRotation = 0.65f;
     }
 
     private void Update()
@@ -138,17 +157,6 @@ public class AirplaneController : MonoBehaviour
             brakesTorque = brakesTorque > 0 ? 0 : 100f;
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha1)) {
-            thrustForwardDirectionMask = 1;
-            thrustUpDirectionMask = 1;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            thrustForwardDirectionMask = 1;
-            thrustUpDirectionMask = 0;
-        }
-
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             // thrustForwardDirectionMask =-1;
@@ -157,16 +165,16 @@ public class AirplaneController : MonoBehaviour
             if (!breakFlipFlop) 
             {
                 Wings.transform.Rotate(new Vector3(-30, 0, 0));
-                Wings.transform.GetChild(0).transform.Rotate(new Vector3(0, 0, 25));
-                Wings.transform.GetChild(1).transform.Rotate(new Vector3(0, 0, -25));
+                RightWing.transform.Rotate(new Vector3(0, 0, 25));
+                LeftWing.transform.Rotate(new Vector3(0, 0, -25));
                 Tail.transform.Rotate(new Vector3(30, 0, 0));
                 Tail.transform.GetChild(0).GetComponent<AeroSurface>().config = BrakingTailConfig;
             } 
             else 
             {
                 Wings.transform.Rotate(new Vector3(30, 0, 0));
-                Wings.transform.GetChild(0).transform.Rotate(new Vector3(0, 0, -25));
-                Wings.transform.GetChild(1).transform.Rotate(new Vector3(0, 0, 25));
+                RightWing.transform.Rotate(new Vector3(0, 0, -25));
+                LeftWing.transform.Rotate(new Vector3(0, 0, 25));
                 Tail.transform.Rotate(new Vector3(-30, 0, 0));
                 Tail.transform.GetChild(0).GetComponent<AeroSurface>().config = NormalTailConfig;
             }
@@ -177,18 +185,76 @@ public class AirplaneController : MonoBehaviour
         {
             if (!diveFlipFlop)
             {
-                Wings.transform.GetChild(0).transform.localEulerAngles = new Vector3(80, 80, 0);
-                Wings.transform.GetChild(1).transform.localEulerAngles = new Vector3(80, -80, 180);
+                RightWing.transform.localEulerAngles = new Vector3(90, 60, 0);
+                LeftWing.transform.localEulerAngles = new Vector3(90, -60, 180);
                 Tail.transform.GetChild(0).GetComponent<AeroSurface>().config = DivingTailConfig;
+                Tail.transform.Rotate(diveTailAngle, 0, 0);
+                Vector3 pos = Wings.transform.localPosition;
+                pos.z += 0.5f;
+                Wings.transform.localPosition = pos;
             }
             else 
             {
-                Wings.transform.GetChild(0).transform.localEulerAngles = new Vector3(0, 0, 0);
-                Wings.transform.GetChild(1).transform.localEulerAngles = new Vector3(0, 0, 180);
+                RightWing.transform.localEulerAngles = new Vector3(0, 0, 0);
+                LeftWing.transform.localEulerAngles = new Vector3(0, 0, 180);
                 Tail.transform.GetChild(0).GetComponent<AeroSurface>().config = NormalTailConfig;
+                Tail.transform.Rotate(-diveTailAngle, 0, 0);
+                Vector3 pos = Wings.transform.localPosition;
+                pos.z -= 0.5f;
+                Wings.transform.localPosition = pos;
             }
             diveFlipFlop = !diveFlipFlop;
         }
+
+        // up flap
+        if (Input.GetKeyDown(KeyCode.Alpha5)) 
+        {
+            downFlapFlipFlop = false;
+            upFlapFlipFlop = !upFlapFlipFlop;
+        }
+
+        // down flap
+        if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            upFlapFlipFlop = false;
+            downFlapFlipFlop = !downFlapFlipFlop;
+        }
+
+        if (upFlapFlipFlop)
+        {
+            RightWing.transform.rotation = Quaternion.Slerp(RightWing.transform.rotation, rightUpTargetTransform.rotation, turnSpeed);
+
+            LeftWing.transform.rotation = Quaternion.Slerp(LeftWing.transform.rotation, leftUpTargetTransform.rotation, turnSpeed);
+        }
+        else if (downFlapFlipFlop)
+        {
+            RightWing.transform.rotation = Quaternion.Slerp(RightWing.transform.rotation, rightDownTargetTransform.rotation, turnSpeed);
+
+            LeftWing.transform.rotation = Quaternion.Slerp(LeftWing.transform.rotation, leftDownTargetTransform.rotation, turnSpeed);
+        }
+
+        if (rb.velocity.magnitude < 10)
+        {
+            targetThrustRotation = 0.65f;
+        }
+        else if (rb.velocity.magnitude < 20)
+        {
+            targetThrustRotation = 0.55f;
+        }
+        else if (rb.velocity.magnitude < 45)
+        {
+            targetThrustRotation = 0.3f;
+        }
+        else if (rb.velocity.magnitude < 65)
+        {
+            targetThrustRotation = 0.1f;
+        }
+        else
+        {
+            targetThrustRotation = 0.0f;
+        }
+
+        thrustRotation = Mathf.SmoothStep(thrustRotation, targetThrustRotation, thrustRotationSpeed);
 
         displayText.text = "V: " + ((int)rb.velocity.magnitude).ToString("D3") + " m/s\n";
         displayText.text += "A: " + ((int)transform.position.y).ToString("D4") + " m\n";
@@ -200,7 +266,7 @@ public class AirplaneController : MonoBehaviour
     {
         SetControlSurfecesAngles(Pitch, Roll, Yaw, Flap);
         aircraftPhysics.SetThrustPercent(thrustPercent);
-        aircraftPhysics.SetThrustDirection(transform.up * thrustUpDirectionMask + transform.forward * thrustForwardDirectionMask);
+        aircraftPhysics.SetThrustDirection(thrustRotation * transform.up + ((1 - thrustRotation) * transform.forward));
         foreach (var wheel in wheels)
         {
             wheel.brakeTorque = brakesTorque;
