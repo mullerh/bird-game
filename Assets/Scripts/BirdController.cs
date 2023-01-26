@@ -26,7 +26,7 @@ public class BirdController : MonoBehaviour
     [SerializeField]
     Text displayText = null;
 
-    float thrustPercent;
+    bool thrustEnabled;
     float brakesTorque;
 
     AircraftPhysics aircraftPhysics;
@@ -46,7 +46,7 @@ public class BirdController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            thrustPercent = thrustPercent > 0 ? 0 : 1f;
+            thrustEnabled = !thrustEnabled;
         }
 
         if (Input.GetKeyDown(KeyCode.F))
@@ -61,14 +61,14 @@ public class BirdController : MonoBehaviour
 
         displayText.text = "V: " + ((int)rb.velocity.magnitude).ToString("D3") + " m/s\n";
         displayText.text += "A: " + ((int)transform.position.y).ToString("D4") + " m\n";
-        displayText.text += "T: " + (int)(thrustPercent * 100) + "%\n";
+        displayText.text += "T: " + (int)(aircraftPhysics.thrustPercent * 100) + "%\n";
         displayText.text += brakesTorque > 0 ? "B: ON" : "B: OFF";
     }
 
     private void FixedUpdate()
     {
         SetControlSurfacesAngles(Pitch, Roll, Yaw, Flap);
-        aircraftPhysics.SetThrustPercent(thrustPercent);
+        aircraftPhysics.SetThrustEnabled(thrustEnabled);
         foreach (var wheel in wheels)
         {
             wheel.brakeTorque = brakesTorque;

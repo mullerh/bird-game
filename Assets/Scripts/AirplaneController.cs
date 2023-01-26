@@ -7,8 +7,6 @@ public class AirplaneController : MonoBehaviour
     [SerializeField]
     List<AeroSurface> controlSurfaces = null;
     [SerializeField]
-    List<WheelCollider> wheels = null;
-    [SerializeField]
     float rollControlSensitivity = 0.2f;
     [SerializeField]
     float pitchControlSensitivity = 0.2f;
@@ -72,7 +70,7 @@ public class AirplaneController : MonoBehaviour
     public float thrustRotationSpeed;
     public float targetThrustRotation;
     public float thrustRotation;
-    float thrustPercent;
+    bool thrustEnabled;
     
     float brakesTorque;
 
@@ -144,7 +142,7 @@ public class AirplaneController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            thrustPercent = thrustPercent > 0 ? 0 : 1f;
+            thrustEnabled = !thrustEnabled;
         }
 
         if (Input.GetKeyDown(KeyCode.F))
@@ -233,46 +231,28 @@ public class AirplaneController : MonoBehaviour
             LeftWing.transform.rotation = Quaternion.Slerp(LeftWing.transform.rotation, leftDownTargetTransform.rotation, turnSpeed);
         }
 
-        if (rb.velocity.magnitude < 10)
+        if (rb.velocity.magnitude < 1)
         {
             targetThrustRotation = 0.65f;
         }
-        else if (rb.velocity.magnitude < 20)
-        {
-            targetThrustRotation = 0.55f;
-        }
-        else if (rb.velocity.magnitude < 45)
-        {
-            targetThrustRotation = 0.3f;
-        }
-        else if (rb.velocity.magnitude < 65)
-        {
-            targetThrustRotation = 0.1f;
-        }
         else
         {
-            targetThrustRotation = 0.0f;
+            targetThrustRotation = 0.15f;
         }
 
         thrustRotation = Mathf.SmoothStep(thrustRotation, targetThrustRotation, thrustRotationSpeed);
 
         displayText.text = "V: " + ((int)rb.velocity.magnitude).ToString("D3") + " m/s\n";
         displayText.text += "A: " + ((int)transform.position.y).ToString("D4") + " m\n";
-        displayText.text += "T: " + (int)(thrustPercent * 100) + "%\n";
+        displayText.text += "T: " + (int)(aircraftPhysics.thrustPercent * 100) + "%\n";
         displayText.text += brakesTorque > 0 ? "B: ON" : "B: OFF";
     }
 
     private void FixedUpdate()
     {
         SetControlSurfecesAngles(Pitch, Roll, Yaw, Flap);
-        aircraftPhysics.SetThrustPercent(thrustPercent);
+        aircraftPhysics.SetThrustEnabled(thrustEnabled);
         aircraftPhysics.SetThrustDirection(thrustRotation * transform.up + ((1 - thrustRotation) * transform.forward));
-        foreach (var wheel in wheels)
-        {
-            wheel.brakeTorque = brakesTorque;
-            // small torque to wake up wheel collider
-            wheel.motorTorque = 0.01f;
-        }
     }
 
     public void SetControlSurfecesAngles(float pitch, float roll, float yaw, float flap)

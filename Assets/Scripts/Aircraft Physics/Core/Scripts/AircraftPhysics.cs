@@ -1,20 +1,28 @@
 ﻿using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using System;
+
 
 [RequireComponent(typeof(Rigidbody))]
 public class AircraftPhysics : MonoBehaviour
 {
     const float PREDICTION_TIMESTEP_FRACTION = 0.5f;
 
-    [SerializeField] 
+    [SerializeField]
     float thrust = 0;
+    [SerializeField]
+    float topSpeed = 0;
+    [SerializeField]
+    float approachingTopSpeed = 0;
     [SerializeField] 
     List<AeroSurface> aerodynamicSurfaces = null;
 
     Rigidbody rb;
     Vector3 thrustDirection;
-    float thrustPercent;
+    bool  thrustEnabled;
+    [HideInInspector]
+    public float thrustPercent;
     BiVector3 currentForceAndTorque;
 
     public void SetThrustDirection(Vector3 direction) 
@@ -22,9 +30,9 @@ public class AircraftPhysics : MonoBehaviour
         thrustDirection = direction.normalized;
     }
 
-    public void SetThrustPercent(float percent)
+    public void SetThrustEnabled(bool enabled)
     {
-        thrustPercent = percent;
+        thrustEnabled = enabled;
     }
 
     private void Awake()
@@ -34,6 +42,18 @@ public class AircraftPhysics : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (thrustEnabled)
+        {
+            thrustPercent = 1;
+            if (rb.velocity.magnitude > approachingTopSpeed)
+            {
+                thrustPercent = Math.Max(0, (1 - ((rb.velocity.magnitude - approachingTopSpeed) / (topSpeed - approachingTopSpeed))));
+            }
+        }
+        else {
+            thrustPercent = 0;
+        }
+
         BiVector3 forceAndTorqueThisFrame = 
             CalculateAerodynamicForces(rb.velocity, rb.angularVelocity, Vector3.zero, 1.2f, rb.worldCenterOfMass);
 
