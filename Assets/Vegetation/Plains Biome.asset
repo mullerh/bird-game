@@ -774,7 +774,7 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.00952381
+        time: 0.012323944
         value: 0
         inSlope: 0
         outSlope: 0
@@ -836,7 +836,7 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.016666668
+        time: 0.01056338
         value: 1
         inSlope: 0
         outSlope: 0
@@ -1090,17 +1090,17 @@ MonoBehaviour:
         outSlope: 0
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
+        inWeight: 0
+        outWeight: 0
       - serializedVersion: 3
-        time: 1
-        value: 1
+        time: 0.01584507
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -1109,7 +1109,7 @@ MonoBehaviour:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.6021898
+        value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -1117,14 +1117,14 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 1
-        value: 0.5
+        time: 0.13556337
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -1134,7 +1134,7 @@ MonoBehaviour:
     NoiseOffset: {x: 0, y: 0}
     InverseNoise: 0
     TextureLayer: 5
-    Enabled: 0
+    Enabled: 1
     LockTexture: 0
     ConcaveEnable: 0
     ConvexEnable: 0
@@ -1877,6 +1877,6 @@ MonoBehaviour:
     TerrainLayer: {fileID: 8574412962073106934, guid: d1b9a7215fb8d0948b75c1162318eb03, type: 2}
   TextureMaskGroupList: []
   TerrainTextureCount: 16
-  BiomeType: 8
+  BiomeType: 0
   BiomeSortOrder: 1
   GenerateBiomeSplamap: 1

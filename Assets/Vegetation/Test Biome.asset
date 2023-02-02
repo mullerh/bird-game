@@ -13518,7 +13518,7 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.016666668
+        time: 0.019366197
         value: 1
         inSlope: 0
         outSlope: 0
