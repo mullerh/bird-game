@@ -159,7 +159,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -257,7 +257,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -420,7 +420,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -742,7 +742,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -839,7 +839,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1050,7 +1050,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1214,7 +1214,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1392,7 +1392,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1537,7 +1537,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1772,6 +1772,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thrust: 10000
+  topSpeed: 0
+  approachingTopSpeed: 0
   aerodynamicSurfaces:
   - {fileID: 6132165184376973556}
   - {fileID: 8874122443730973859}
@@ -1780,6 +1782,7 @@ MonoBehaviour:
   - {fileID: 7424192030981587344}
   - {fileID: 8874122442978715973}
   - {fileID: 8675612924485543839}
+  thrustPercent: 0
 --- !u!114 &4306179163787069798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1800,7 +1803,6 @@ MonoBehaviour:
   - {fileID: 6132165184376973556}
   - {fileID: 8874122443730973859}
   - {fileID: 6132165184359168764}
-  wheels: []
   rollControlSensitivity: 0.15
   pitchControlSensitivity: 0.25
   yawControlSensitivity: 0.4
@@ -1809,3 +1811,29 @@ MonoBehaviour:
   Roll: 0
   Flap: 0
   displayText: {fileID: 0}
+  BrakingTailConfig: {fileID: 0}
+  DivingTailConfig: {fileID: 0}
+  NormalTailConfig: {fileID: 0}
+  Wing1UpsideDownConfig: {fileID: 0}
+  Wing2UpsideDownConfig: {fileID: 0}
+  Wing3UpsideDownConfig: {fileID: 0}
+  Wing1NormalConfig: {fileID: 0}
+  Wing2NormalConfig: {fileID: 0}
+  Wing3NormalConfig: {fileID: 0}
+  LeftWing1Surface: {fileID: 0}
+  LeftWing2Surface: {fileID: 0}
+  LeftWing3Surface: {fileID: 0}
+  RightWing1Surface: {fileID: 0}
+  RightWing2Surface: {fileID: 0}
+  RightWing3Surface: {fileID: 0}
+  upsideDownThreshold: 0
+  diveTailAngle: 0
+  thrustRotationSpeed: 0
+  targetThrustRotation: 0
+  thrustRotation: 0
+  targetAngle: 0
+  turnSpeed: 0.05
+  rightUpTargetTransform: {fileID: 0}
+  leftUpTargetTransform: {fileID: 0}
+  rightDownTargetTransform: {fileID: 0}
+  leftDownTargetTransform: {fileID: 0}

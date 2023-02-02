@@ -148,7 +148,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 158900350}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -545.01953, y: 0, z: 1036.3281}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -372,7 +372,7 @@ MonoBehaviour:
   PersistentVegetationStorage: {fileID: 495462961}
   PredictiveCellLoaderCellsPerFrame: 1
   LoadPotentialVegetationCells: 1
-  CurrentTabIndex: 4
+  CurrentTabIndex: 5
   VegetationPackageIndex: 0
   SeaLevel: 9
   ExcludeSeaLevelCells: 0
@@ -1058,7 +1058,7 @@ Terrain:
   m_DrawTreesAndFoliage: 0
   m_StaticShadowCaster: 0
   m_ReflectionProbeUsage: 1
-  m_MaterialTemplate: {fileID: 10652, guid: 0000000000000000f000000000000000, type: 0}
+  m_MaterialTemplate: {fileID: 2100000, guid: 594ea882c5a793440b60ff72d896021e, type: 2}
   m_BakeLightProbesForTrees: 1
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
@@ -1123,8 +1123,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 967077607}
-  m_LocalRotation: {x: -0.110599585, y: -0.71280086, z: 0.1168502, w: -0.682663}
-  m_LocalPosition: {x: -2.8645086, y: 53.120384, z: 307.657}
+  m_LocalRotation: {x: -0.10786997, y: -0.83010185, z: 0.17447394, w: -0.5185111}
+  m_LocalPosition: {x: -545.0569, y: 702.77313, z: 1036.3767}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1225,6 +1225,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1108062699}
   - component: {fileID: 1108062698}
+  - component: {fileID: 1108062700}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -1309,6 +1310,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &1108062700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1108062697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 1
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
 --- !u!1 &1235991646
 GameObject:
   m_ObjectHideFlags: 0
@@ -1910,7 +1931,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1869038278}
-  m_LocalRotation: {x: 0.022779424, y: -0.00000012445501, z: 0.0000000028357487, w: 0.99974054}
+  m_LocalRotation: {x: 0.022779427, y: -0.000000118859404, z: 0.0000000027082516, w: 0.99974054}
   m_LocalPosition: {x: 10.470001, y: 50.41, z: 305}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1991,15 +2012,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1394096478, guid: c337102077fc5744cb7573a54ffd0e3a, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.022779424
+      value: 0.022779427
       objectReference: {fileID: 0}
     - target: {fileID: 1394096478, guid: c337102077fc5744cb7573a54ffd0e3a, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.00000012445501
+      value: -0.000000118859404
       objectReference: {fileID: 0}
     - target: {fileID: 1394096478, guid: c337102077fc5744cb7573a54ffd0e3a, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000028357487
+      value: 0.0000000027082516
       objectReference: {fileID: 0}
     - target: {fileID: 1394096479, guid: c337102077fc5744cb7573a54ffd0e3a, type: 3}
       propertyPath: m_Follow
@@ -2102,7 +2123,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: e823cd5b5d27c0f4b8256e7c12ee3e6d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
