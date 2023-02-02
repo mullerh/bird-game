@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18884689, g: 0.219037, b: 0.24241176, a: 1}
+  m_IndirectSpecularColor: {r: 0.02973552, g: 0.03934924, b: 0.047890984, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -148,7 +148,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 158900350}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -545.01953, y: 0, z: 1036.3281}
+  m_LocalPosition: {x: 458.30078, y: 0, z: 533.6914}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -372,7 +372,7 @@ MonoBehaviour:
   PersistentVegetationStorage: {fileID: 495462961}
   PredictiveCellLoaderCellsPerFrame: 1
   LoadPotentialVegetationCells: 1
-  CurrentTabIndex: 5
+  CurrentTabIndex: 4
   VegetationPackageIndex: 0
   SeaLevel: 9
   ExcludeSeaLevelCells: 0
@@ -1123,8 +1123,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 967077607}
-  m_LocalRotation: {x: -0.10786997, y: -0.83010185, z: 0.17447394, w: -0.5185111}
-  m_LocalPosition: {x: -545.0569, y: 702.77313, z: 1036.3767}
+  m_LocalRotation: {x: -0.044631954, y: -0.95436054, z: 0.20321871, w: -0.21425731}
+  m_LocalPosition: {x: 458.3631, y: 39.67125, z: 533.7061}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
