@@ -31,28 +31,28 @@ public class RippleController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other) 
-    {
-        if (other.gameObject.layer == 4 && rb.velocity.y > 0.02f)
-        {
-            createRipple(-180, 180, 3, 2, 2, 2);
-        }
-    }
+//    private void OnTriggerEnter(Collider other) 
+//    {
+//        if (other.gameObject.layer == 4 && Math.Abs(rb.velocity.y) > 0.4f)
+//        {
+//            createRipple(-180, 180, 3, 2, 2, 2);
+//        }
+//    }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.layer == 4 && Time.renderedFrameCount % 5 == 0 && Math.Sqrt(Math.Pow(rb.velocity.x, 2) + Math.Pow(rb.velocity.z, 2)) > 0.03f)
+        if (other.gameObject.layer == 4 && Time.renderedFrameCount % 2 == 0 && Math.Sqrt(Math.Pow(rb.velocity.x, 2) + Math.Pow(rb.velocity.z, 2)) > 0.03f)
         {
             int y = (int) transform.eulerAngles.y;
             createRipple(y - 90, y + 90, 3, 5, 2, 1);
         }
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.layer == 4 && rb.velocity.y > 0.02f)
-        {
-            createRipple(-180, 180, 3, 2, 2, 2);
-        }
-    }
+//    private void OnTriggerExit(Collider other)
+//    {
+//        if (other.gameObject.layer == 4 && Math.Abs(rb.velocity.y) > 0.4f)
+//        {
+//            createRipple(-180, 180, 3, 2, 2, 2);
+//        }
+//    }
 }
