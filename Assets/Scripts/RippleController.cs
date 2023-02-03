@@ -14,6 +14,8 @@ public class RippleController : MonoBehaviour
     void Update()
     {
         rippleCamera.transform.position = transform.position + Vector3.up * 10;
+        Shader.SetGlobalVector("_Player_Position", transform.position);
+        Debug.Log(transform.position);
     }
 
     private void createRipple(int Start, int End, int Delta, float Speed, float Size, float Lifetime) 
