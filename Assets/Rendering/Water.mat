@@ -64,7 +64,7 @@ Material:
     - _Normal_Strength: 0.251
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Ripple_Strength: 10
+    - _Ripple_Strength: 5
     - _Smoothness: 1
     - _Strength: 0.33
     m_Colors:

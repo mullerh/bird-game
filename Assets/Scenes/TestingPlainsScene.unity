@@ -148,7 +148,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 158900350}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 66.30859, y: 0, z: 599.5117}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1030,7 +1030,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 688928211}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!114 &573172597
 MonoBehaviour:
@@ -1241,8 +1241,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 967077607}
-  m_LocalRotation: {x: -0.10380849, y: -0.89163786, z: 0.35085613, w: -0.26665664}
-  m_LocalPosition: {x: 66.34181, y: 15.62026, z: 599.57074}
+  m_LocalRotation: {x: -0.22857845, y: -0.7157274, z: 0.27305353, w: -0.60077286}
+  m_LocalPosition: {x: 22.308853, y: 17.55931, z: 553.1766}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1815,7 +1815,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 35
+  orthographic size: 25
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -1967,6 +1967,7 @@ MonoBehaviour:
   ripple: {fileID: 2147232622}
   rb: {fileID: 1825964554}
   rippleCamera: {fileID: 1437731392}
+  rippleInterval: 0.1
 --- !u!54 &1825964554 stripped
 Rigidbody:
   m_CorrespondingSourceObject: {fileID: 7281754904321658850, guid: c337102077fc5744cb7573a54ffd0e3a, type: 3}
@@ -2084,8 +2085,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1869038278}
-  m_LocalRotation: {x: 0.13173187, y: -0.000000014771305, z: 0.000000001962958, w: 0.9912854}
-  m_LocalPosition: {x: 39.75, y: 12.774, z: 631.7}
+  m_LocalRotation: {x: 0.16359068, y: 0.000000028404862, z: -0.0000000047102255, w: 0.98652834}
+  m_LocalPosition: {x: 39.75, y: 12.524, z: 632.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2186,7 +2187,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 772719979, guid: c337102077fc5744cb7573a54ffd0e3a, type: 3}
       propertyPath: m_FollowOffset.y
-      value: 2
+      value: 1.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 772719979, guid: c337102077fc5744cb7573a54ffd0e3a, type: 3}
+      propertyPath: m_FollowOffset.z
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 1394096478, guid: c337102077fc5744cb7573a54ffd0e3a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2194,27 +2199,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1394096478, guid: c337102077fc5744cb7573a54ffd0e3a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 13.333333
+      value: 11.666666
       objectReference: {fileID: 0}
     - target: {fileID: 1394096478, guid: c337102077fc5744cb7573a54ffd0e3a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -26.666666
+      value: -20
       objectReference: {fileID: 0}
     - target: {fileID: 1394096478, guid: c337102077fc5744cb7573a54ffd0e3a, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9912854
+      value: 0.98652834
       objectReference: {fileID: 0}
     - target: {fileID: 1394096478, guid: c337102077fc5744cb7573a54ffd0e3a, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.13173187
+      value: 0.16359068
       objectReference: {fileID: 0}
     - target: {fileID: 1394096478, guid: c337102077fc5744cb7573a54ffd0e3a, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000014771305
+      value: 0.000000028404862
       objectReference: {fileID: 0}
     - target: {fileID: 1394096478, guid: c337102077fc5744cb7573a54ffd0e3a, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000001962958
+      value: -0.0000000047102255
       objectReference: {fileID: 0}
     - target: {fileID: 1394096479, guid: c337102077fc5744cb7573a54ffd0e3a, type: 3}
       propertyPath: m_Follow
@@ -2227,6 +2232,10 @@ PrefabInstance:
     - target: {fileID: 1324831055155960071, guid: c337102077fc5744cb7573a54ffd0e3a, type: 3}
       propertyPath: m_LocalPosition.z
       value: 1.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 3577034311473625077, guid: c337102077fc5744cb7573a54ffd0e3a, type: 3}
+      propertyPath: m_Name
+      value: CameraFollowObject
       objectReference: {fileID: 0}
     - target: {fileID: 7280176255901972857, guid: c337102077fc5744cb7573a54ffd0e3a, type: 3}
       propertyPath: m_Name
@@ -2321,7 +2330,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e823cd5b5d27c0f4b8256e7c12ee3e6d, type: 2}
+  - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2346,7 +2355,7 @@ ParticleSystemRenderer:
   m_MeshDistribution: 0
   m_SortMode: 3
   m_MinParticleSize: 0
-  m_MaxParticleSize: 0.5
+  m_MaxParticleSize: 2
   m_CameraVelocityScale: 0
   m_VelocityScale: 0
   m_LengthScale: 2
@@ -3312,7 +3321,7 @@ ParticleSystem:
     m_BurstCount: 0
     m_Bursts: []
   SizeModule:
-    enabled: 0
+    enabled: 1
     curve:
       serializedVersion: 2
       minMaxState: 1
@@ -3325,20 +3334,29 @@ ParticleSystem:
           time: 0
           value: 0
           inSlope: 0
-          outSlope: 1
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 0.018777918
+          value: 0.2818154
+          inSlope: 0.71501166
+          outSlope: 0.71501166
           tangentMode: 0
           weightedMode: 0
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
           time: 1
-          value: 1
-          inSlope: 1
+          value: 0.75
+          inSlope: 0
           outSlope: 0
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
+          inWeight: 0
+          outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
@@ -3661,7 +3679,7 @@ ParticleSystem:
         ctime6: 0
         ctime7: 0
         atime0: 0
-        atime1: 4981
+        atime1: 9445
         atime2: 65535
         atime3: 0
         atime4: 0
